@@ -1,0 +1,15 @@
+{
+  "name": "stack-tracker",
+  "author": {},
+  "version": "1.0.0",
+  "dependencies": {
+    "grunt": "0.4.0rc4",
+    "grunt-neuter": "git://github.com/CodeOfficer/grunt-neuter.git",
+    "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
+    "grunt-contrib-concat": "0.1.1",
+    "grunt-contrib-jshint": "0.1.0",
+    "grunt-contrib-watch": "0.2.0a",
+    "grunt-ember-templates": "git://github.com/CodeOfficer/grunt-ember-templates.git"
+  },
+  "devDependencies": {}
+}
