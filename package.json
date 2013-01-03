@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "dependencies": {
     "grunt": "0.4.0rc4",
+    "grunt-notify": "0.1.3",
     "grunt-neuter": "git://github.com/CodeOfficer/grunt-neuter.git",
     "grunt-contrib-copy": "git://github.com/gruntjs/grunt-contrib-copy.git",
     "grunt-contrib-concat": "0.1.1",

@@ -21,13 +21,29 @@ module.exports = function(grunt) {
         devel:   true,
         debug:   true,
         globals: {
-          jQuery:  true,
-          Ember:   true,
-          Em:      true,
-          DS:      true,
-          require: true,
-          App:     true,
-          params:  true
+          // app
+          App:        true,
+          // neuter
+          require:    true,
+          // jquery
+          jQuery:     true,
+          // ember
+          Ember:      true,
+          Em:         true,
+          DS:         true,
+          // mocha
+          describe:   true,
+          before:     true,
+          after:      true,
+          beforeEach: true,
+          afterEach:  true,
+          it:         true,
+          done:       true,
+          assert:     true,
+          setup:      true,
+          teardown:   true,
+          suite:      true,
+          test:       true
         }
       },
 
@@ -58,19 +74,32 @@ module.exports = function(grunt) {
         options: {cwd: 'lib'},
         files: {'build/': 'index.html'}
       },
-      css: {
+      app_css: {
         options: {cwd: 'lib/css'},
         files: {'build/': 'app.css'}
       },
       test: {
         options: {cwd: 'test'},
-        files: {'build/': 'test.html'}
+        files: {'build/': ['test.html']}
+      },
+      test_css: {
+        options: {cwd: 'test/vendor'},
+        files: {'build/': 'mocha.css'}
+      },
+      test_images: {
+        options: {cwd: 'test/vendor/images'},
+        files: {'build/images/': '*'}
       }
     },
 
     concat: {
       test_vendor: {
-        files: {'build/test_vendor.js': ['test/vendor/**/*.js']}
+        files: {'build/test_vendor.js': [
+          'test/vendor/mocha.js',
+          'test/vendor/chai.js',
+          'test/vendor/chai-jquery.js',
+          'test/vendor/sinon.js'
+        ]}
       },
       vendor: {
         files: {'build/vendor.js': [
@@ -93,9 +122,18 @@ module.exports = function(grunt) {
       }
     },
 
+    notify : {
+      build : {
+        options: {
+          message : 'Carry on ...',
+          title : 'Build complete'
+        }
+      }
+    },
+
     watch: {
       files: ['Gruntfile.js', 'lib/**/*', 'test/**/*'],
-      tasks: ['app', 'test']
+      tasks: ['app', 'test', 'notify:build']
     }
 
   });
@@ -106,11 +144,12 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-neuter');
   grunt.loadNpmTasks('grunt-ember-templates');
+  grunt.loadNpmTasks('grunt-notify');
 
-  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:css', 'copy:json']);
-  grunt.registerTask('test', ['jshint:test', 'neuter:test', 'copy:test']);
+  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:app_css', 'copy:json']);
+  grunt.registerTask('test', ['jshint:test', 'neuter:test', 'copy:test', 'copy:test_css', 'copy:test_images']);
   grunt.registerTask('vendor', ['concat:vendor', 'concat:test_vendor']);
 
-  grunt.registerTask('default', ['app', 'test', 'vendor', 'watch']);
+  grunt.registerTask('default', ['app', 'test', 'vendor', 'notify:build', 'watch']);
 
 };
