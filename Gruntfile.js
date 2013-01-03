@@ -23,6 +23,7 @@ module.exports = function(grunt) {
         globals: {
           // app
           App:        true,
+          Todos:      true,
           // neuter
           require:    true,
           // jquery
@@ -61,15 +62,6 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      json: {
-        options: {cwd: 'lib/app/json'},
-        files: {
-          'build/things.json': 'things.json',
-          'build/things/1.json': 'things/1.json',
-          'build/things/2.json': 'things/2.json',
-          'build/things/3.json': 'things/3.json'
-        }
-      },
       app: {
         options: {cwd: 'lib'},
         files: {'build/': 'index.html'}
@@ -146,7 +138,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-notify');
 
-  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:app_css', 'copy:json']);
+  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:app_css']);
   grunt.registerTask('test', ['jshint:test', 'neuter:test', 'copy:test', 'copy:test_css', 'copy:test_images']);
   grunt.registerTask('vendor', ['concat:vendor', 'concat:test_vendor']);
 
