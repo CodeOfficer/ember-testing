@@ -12,36 +12,44 @@ Ember.Application.prototype.reopen({
       Todos.set('store', null);
     }
     Todos.store = Todos.Store.create();
-    Todos.initialize();
+    // Todos.initialize();
   }
 });
 
-
 describe("Application", function() {
-  beforeEach(function(done) {
-    console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~');
-    Ember.$("body").append("<div id='app'></div>");
-    Ember.run(function() {
-      Todos.set('rootElement', '#app');
-      Todos.reset();
+  it("should have a container", function() {
+    expect(Todos.get('container')).to.be.an['instanceof'](Ember.Container);
+  });
+
+  it("should have a router", function() {
+    expect(Todos.get('container').lookup('router:main')).to.be.an['instanceof'](Ember.Router);
+  });
+
+  describe("can be reset", function() {
+    beforeEach(function(done) {
+      Ember.$("body").append("<div id='app'></div>");
+      Ember.run(function() {
+        Todos.reset();
+        Todos.set('rootElement', '#app');
+        Todos.initialize();
+      });
+      done();
     });
-    console.log(Todos.get('container').lookup('router:main'));
-    console.log(Todos.get('eventDispatcher'));
-    done();
-  });
 
-  afterEach(function(done) {
-    Ember.run(function() {
-      Ember.$("#app").remove();
+    afterEach(function(done) {
+      Ember.run(function() {
+        Ember.$("#app").remove();
+      });
+      done();
     });
-    done();
-  });
 
-  it("can initialize", function() {
-    assert.ok(true, "does not raise");
-  });
+    it("can initialize", function() {
+      assert.ok(true, "does not raise");
 
-  it("can initialize again", function() {
-    assert.ok(true, "does not raise");
+    });
+
+    it("can initialize again", function() {
+      assert.ok(true, "does not raise");
+    });
   });
 });

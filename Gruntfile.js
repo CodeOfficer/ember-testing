@@ -41,6 +41,8 @@ module.exports = function(grunt) {
           it:         true,
           done:       true,
           assert:     true,
+          expect:     true,
+          should:     true,
           setup:      true,
           teardown:   true,
           suite:      true,
