@@ -45,30 +45,3 @@ describe("Application", function() {
     assert.ok(true, "does not raise");
   });
 });
-
-
-
-// describe("Ember Application", function() {
-//   var application = null;
-
-//   beforeEach(function(done) {
-//     Ember.$("body").append("<div id='app'></div>");
-//     Ember.run(function() {
-//       application = Ember.Application.create({rootElement: "#app"});
-//       done();
-//     });
-//   });
-
-//   afterEach(function(done) {
-//     Ember.run(function() {
-//       application.destroy();
-//       application = null;
-//       Ember.$("#app").remove();
-//       done();
-//     });
-//   });
-
-//   it("can initialize the application", function() {
-//     assert.ok(true, "does not raise");
-//   });
-// });

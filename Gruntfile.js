@@ -70,6 +70,10 @@ module.exports = function(grunt) {
         options: {cwd: 'lib/css'},
         files: {'build/': 'app.css'}
       },
+      app_images: {
+        options: {cwd: 'lib/img'},
+        files: {'build/images/': '*'}
+      },
       test: {
         options: {cwd: 'test'},
         files: {'build/': ['test.html']}
@@ -138,7 +142,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-ember-templates');
   grunt.loadNpmTasks('grunt-notify');
 
-  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:app_css']);
+  grunt.registerTask('app', ['jshint:app', 'neuter:app', 'ember_templates:app', 'copy:app', 'copy:app_css', 'copy:app_images']);
   grunt.registerTask('test', ['jshint:test', 'neuter:test', 'copy:test', 'copy:test_css', 'copy:test_images']);
   grunt.registerTask('vendor', ['concat:vendor', 'concat:test_vendor']);
 
