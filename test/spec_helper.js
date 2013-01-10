@@ -8,13 +8,16 @@ window.app = function(code){
   $W.Ember.run(code);
 };
 
-window.integrationTest = function(testname, callback) {
+window.integrationTest = function(testname, callback, jasmineSuite) {
   var func, resume, oldApp = window.Todos;
+
+  console.log('--- HMMMMM', this);
+
 
   func = function() {
     var timer;
 
-    console.log('--- integrationTest executing', this);
+    console.log('--- integrationTest executing', jasmineSuite);
 
     $('#iframe').on('load', function(){
       console.log('--- iframe onLoad');
@@ -23,7 +26,6 @@ window.integrationTest = function(testname, callback) {
       window.$J    = $W.$;
       window.Todos = $W.Todos;
 
-      console.log('integrationTest#advanceReadiness');
       spyOn(Todos, 'didBecomeReady').andCallThrough();
       Todos.advanceReadiness();
 
@@ -33,12 +35,13 @@ window.integrationTest = function(testname, callback) {
       });
 
       runs(function(){
-        console.log('running callback');
+        console.log('--- running actual');
         callback();
         window.Todos = oldApp;
         clearTimeout(timer);
         resume = true;
       });
+
     });
 
     document.getElementById('iframe').contentWindow.location.reload();
@@ -50,9 +53,12 @@ window.integrationTest = function(testname, callback) {
   };
 
   runs(function(){
-    console.log('--- runs test');
-    jasmine.getEnv().describe(testname, func);
+    describe.call(jasmineSuite, testname, func);
   });
+
+  waitsFor(function(){
+    return resume === true;
+  }, 'before we resume', 2000);
 };
 
 
