@@ -22,31 +22,46 @@ module.exports = function(grunt) {
         debug:   true,
         globals: {
           // app
-          App:        true,
-          Todos:      true,
+          App:             true,
+          Todos:           true,
           // neuter
-          require:    true,
+          require:         true,
           // jquery
-          jQuery:     true,
+          jQuery:          true,
           // ember
-          Ember:      true,
-          Em:         true,
-          DS:         true,
+          Ember:           true,
+          Em:              true,
+          DS:              true,
+          // testing
+          app:             true,
+          integrationTest: true,
+          $:               true,
+          $W:              true,
+          $J:              true,
+          // jasmine
+          jasmine:         true,
+          ok:              true,
+          start:           true,
+          stop:            true,
+          waitsFor:        true,
+          runs:            true,
+          spyOn:           true,
+          waits:           true,
           // mocha
-          describe:   true,
-          before:     true,
-          after:      true,
-          beforeEach: true,
-          afterEach:  true,
-          it:         true,
-          done:       true,
-          assert:     true,
-          expect:     true,
-          should:     true,
-          setup:      true,
-          teardown:   true,
-          suite:      true,
-          test:       true
+          describe:        true,
+          before:          true,
+          after:           true,
+          beforeEach:      true,
+          afterEach:       true,
+          it:              true,
+          done:            true,
+          assert:          true,
+          expect:          true,
+          should:          true,
+          setup:           true,
+          teardown:        true,
+          suite:           true,
+          test:            true
         }
       },
 
@@ -78,11 +93,11 @@ module.exports = function(grunt) {
       },
       test: {
         options: {cwd: 'test'},
-        files: {'build/': ['test.html']}
+        files: {'build/': ['test.html', 'iframe.html']}
       },
       test_css: {
         options: {cwd: 'test/vendor'},
-        files: {'build/': 'mocha.css'}
+        files: {'build/': 'jasmine.css'}
       },
       test_images: {
         options: {cwd: 'test/vendor/images'},
@@ -93,10 +108,8 @@ module.exports = function(grunt) {
     concat: {
       test_vendor: {
         files: {'build/test_vendor.js': [
-          'test/vendor/mocha.js',
-          'test/vendor/chai.js',
-          'test/vendor/chai-jquery.js',
-          'test/vendor/sinon.js'
+          'test/vendor/jasmine.js',
+          'test/vendor/jasmine-html.js'
         ]}
       },
       vendor: {

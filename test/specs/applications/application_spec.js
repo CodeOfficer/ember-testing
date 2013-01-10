@@ -1,55 +1,43 @@
 require('test/spec_helper');
 
-Ember.Application.prototype.reopen({
-  reset: function() {
-    console.log('-- reset');
-    Todos.set('_readinessDeferrals', 1);
-    Todos.set('isInitialized', false);
-    Todos.get('container').destroy();
-    Todos.buildContainer();
-    if (Todos.store) {
-      Todos.store.destroy();
-      Todos.set('store', null);
-    }
-    Todos.store = Todos.Store.create();
-    // Todos.initialize();
-  }
+
+describe("A suite", function() {
+  it("contains spec with an expectation", function() {
+    expect(true).toBe(true);
+  });
 });
 
-describe("Application", function() {
-  it("should have a container", function() {
-    expect(Todos.get('container')).to.be.an['instanceof'](Ember.Container);
-  });
+integrationTest('integrationTest', function() {
+  describe("A suite", function() {
+    var todo1, todo2;
 
-  it("should have a router", function() {
-    expect(Todos.get('container').lookup('router:main')).to.be.an['instanceof'](Ember.Router);
-  });
+    console.log('TESTS ARE EXECUTING');
 
-  describe("can be reset", function() {
-    beforeEach(function(done) {
-      Ember.$("body").append("<div id='app'></div>");
-      Ember.run(function() {
-        Todos.reset();
-        Todos.set('rootElement', '#app');
-        Todos.initialize();
+    it("contains spec with an expectation", function() {
+      expect(true).toBe(true);
+    });
+
+    // assertFeedIsEmpty();
+
+    describe("Another suite", function() {
+      it("contains another spec with an expectation", function() {
+        todo1 = Todos.Todo.createRecord({title: 'todo 1'});
+        todo2 = Todos.Todo.createRecord({title: 'todo 2'});
+
+        app(function() {
+          Todos.__container__.lookup('controller:todos').pushObject(todo1);
+          Todos.__container__.lookup('controller:filteredTodos').pushObject(todo2);
+        });
+
+        console.log('TESTS ARE EXECUTING??????????');
+        expect(true).toBe(true);
       });
-      done();
     });
 
-    afterEach(function(done) {
-      Ember.run(function() {
-        Ember.$("#app").remove();
-      });
-      done();
-    });
-
-    it("can initialize", function() {
-      assert.ok(true, "does not raise");
-
-    });
-
-    it("can initialize again", function() {
-      assert.ok(true, "does not raise");
+    // assertInFeed(todo1);
+    // assertInFeed(todo2);
+    it("contains an integrationTest spec", function() {
+      expect(true).toBe(true);
     });
   });
 });
