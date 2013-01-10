@@ -47,6 +47,7 @@ module.exports = function(grunt) {
           runs:            true,
           spyOn:           true,
           waits:           true,
+          jasmineEnv:      true,
           // mocha
           describe:        true,
           before:          true,
