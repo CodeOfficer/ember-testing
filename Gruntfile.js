@@ -64,30 +64,12 @@ module.exports = function(grunt) {
     },
 
     copy: {
-      app: {
-        options: {cwd: 'lib'},
-        files: {'build/': 'index.html'}
-      },
-      app_css: {
-        options: {cwd: 'lib/css'},
-        files: {'build/': 'app.css'}
-      },
-      app_images: {
-        options: {cwd: 'lib/img'},
-        files: {'build/images/': '*'}
-      },
-      test: {
-        options: {cwd: 'test'},
-        files: {'build/': ['test.html']}
-      },
-      test_css: {
-        options: {cwd: 'test/vendor'},
-        files: {'build/': 'mocha.css'}
-      },
-      test_images: {
-        options: {cwd: 'test/vendor/images'},
-        files: {'build/images/': '*'}
-      }
+      app:         {expand: true, cwd: 'lib/', src: ['index.html'], dest: 'build/'},
+      app_css:     {expand: true, cwd: 'lib/css/', src: ['app.css'], dest: 'build/'},
+      app_images:  {expand: true, cwd: 'lib/img/', src: ['*'], dest: 'build/images/'},
+      test:        {expand: true, cwd: 'test/', src: ['test.html'], dest: 'build/'},
+      test_css:    {expand: true, cwd: 'test/vendor/', src: ['mocha.css'], dest: 'build/'},
+      test_images: {expand: true, cwd: 'test/vendor/images', src: ['*'], dest: 'build/images/'}
     },
 
     concat: {
