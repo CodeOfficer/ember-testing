@@ -10,7 +10,7 @@
     "grunt-contrib-concat": "0.1.2rc6",
     "grunt-contrib-jshint": "0.1.1rc6",
     "grunt-contrib-watch": "0.2.0rc7",
-    "grunt-ember-templates": "0.4.2rc7"
+    "grunt-ember-templates": "git://github.com/CodeOfficer/grunt-ember-templates.git#update-handlebars"
   },
   "devDependencies": {}
 }
